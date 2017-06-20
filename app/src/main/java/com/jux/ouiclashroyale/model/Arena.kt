@@ -7,5 +7,7 @@ import com.google.gson.annotations.SerializedName
  */
 data class Arena(
         @SerializedName("_id") val id: String = "",
-        @SerializedName("idName") val idName: String = ""
+        @SerializedName("idName") val idName: String = "",
+        @SerializedName("number") val number: Int = 0,
+        @SerializedName("name") val name: String = ""
 )
