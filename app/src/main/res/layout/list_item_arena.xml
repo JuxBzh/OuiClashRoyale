@@ -8,7 +8,8 @@
     android:paddingStart="?attr/listPreferredItemPaddingLeft"
     android:paddingEnd="?attr/listPreferredItemPaddingRight"
     android:paddingLeft="?attr/listPreferredItemPaddingLeft"
-    android:paddingRight="?attr/listPreferredItemPaddingRight">
+    android:paddingRight="?attr/listPreferredItemPaddingRight"
+    android:background="@drawable/selectable_background">
 
     <ImageView
         android:id="@+id/logo"
@@ -19,7 +20,7 @@
         android:layout_marginRight="16dp"
         android:contentDescription="@string/content_desc_arena_logo"
         android:scaleType="centerCrop"
-        android:src="@mipmap/ic_launcher" />
+        tools:src="@mipmap/ic_launcher" />
 
     <TextView
         android:id="@+id/name"
@@ -38,6 +39,6 @@
         android:layout_gravity="bottom"
         android:textColor="?attr/colorAccent"
         android:textSize="14sp"
-        tools:text="0 trophy" />
+        tools:text="0 trophies" />
 
 </LinearLayout>
