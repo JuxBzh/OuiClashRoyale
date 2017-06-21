@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">OuiClash Royale</string>
-    <string name="no_arena">Aucune arène !!!</string>
+
+    <string name="title_home_activity">Arenas</string>
+
+    <string name="no_arena">No arenas !!!</string>
     <string name="min_trophies">%d trophies</string>
 
     <string name="content_desc_arena_logo">The logo of the arena</string>
