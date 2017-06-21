@@ -39,4 +39,7 @@ dependencies {
 
     // Utility library for using recycler views
     implementation 'com.juxbzh:recyclerviewtoolkit:0.3.2'
+
+    // Media management library
+    implementation 'com.github.bumptech.glide:glide:3.7.0'
 }

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:minHeight="?attr/listPreferredItemHeight"
+    android:minHeight="?attr/listPreferredItemHeightLarge"
     android:paddingStart="?attr/listPreferredItemPaddingLeft"
     android:paddingEnd="?attr/listPreferredItemPaddingRight"
     android:paddingLeft="?attr/listPreferredItemPaddingLeft"
@@ -12,8 +12,8 @@
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
         android:layout_gravity="center_vertical"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
