@@ -21,6 +21,7 @@ class ArenaAdapter(context: Context) : BaseAdapter<Arena>(context) {
         val arena: Arena = getItem(i)
 
         viewHolder.name.text = arena.name
+        viewHolder.trophies.text = mContext.getString(R.string.min_trophies, arena.minTrophies)
     }
 
     override fun getItemId(position: Int): Long {
