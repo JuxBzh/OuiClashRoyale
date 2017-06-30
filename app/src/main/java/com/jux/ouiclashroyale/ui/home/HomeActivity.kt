@@ -13,6 +13,7 @@ import com.jux.ouiclashroyale.R
 import com.jux.ouiclashroyale.model.Arena
 import com.jux.ouiclashroyale.network.HttpClient
 import com.jux.ouiclashroyale.network.HttpClientCallback
+import com.jux.ouiclashroyale.ui.arena.ArenaActivity
 import com.jux.recyclerviewtoolkit.adapter.MultipleChoiceModeAdapter
 import kotlinx.android.synthetic.main.activity_home.*
 import okhttp3.Call
@@ -25,7 +26,7 @@ class HomeActivity : AppCompatActivity(),
         MultipleChoiceModeAdapter.OnItemClickListener {
 
     val tag: String = "HomeActivity"
-    val arenaUrl: String = "http://www.clashapi.xyz/api/arenas"
+    val arenasUrl: String = "http://www.clashapi.xyz/api/arenas"
 
     val adapter: ArenaAdapter = ArenaAdapter(this)
 
@@ -44,7 +45,7 @@ class HomeActivity : AppCompatActivity(),
         swipe_refresh_layout.isRefreshing = true
 
         // Download arenas
-        val request: Request = Request.Builder().url(arenaUrl).build()
+        val request: Request = Request.Builder().url(arenasUrl).build()
         HttpClient.asynchronousCall(request, object : HttpClientCallback<Array<Arena>> {
             override fun onSuccess(result: Array<Arena>) {
                 Log.i(tag, "Number of arenas: " + result.size)
@@ -64,6 +65,10 @@ class HomeActivity : AppCompatActivity(),
 
     // ArenaAdapter.OnItemClickListener
     override fun onItemClick(v: View?, position: Int) {
+        val arena = adapter.getItem(position)
+
+        val intent = ArenaActivity.getIntent(this, arena.id)
+        startActivity(intent)
     }
 
     override fun onInteractiveElementClick(iconView: View?, position: Int) {
