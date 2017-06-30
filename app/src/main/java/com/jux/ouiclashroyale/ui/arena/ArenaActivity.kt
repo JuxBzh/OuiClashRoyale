@@ -48,6 +48,13 @@ class ArenaActivity : AppCompatActivity() {
                 .asBitmap()
                 .centerCrop()
                 .into(arena_logo)
+
+        setupDetailBlock(arena)
+    }
+
+    private fun setupDetailBlock(arena: Arena) {
+        detail_victory_gold.text = getString(R.string.gold_per_victory, arena.victoryGold)
+        detail_min_trophies.text = getString(R.string.min_trophies_long, arena.minTrophies)
     }
 
     private fun downloadArena() {
