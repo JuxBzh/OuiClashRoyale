@@ -1,8 +1,6 @@
 package com.jux.ouiclashroyale.ui.home
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
@@ -50,15 +48,11 @@ class HomeActivity : AppCompatActivity(),
             override fun onSuccess(result: Array<Arena>) {
                 Log.i(tag, "Number of arenas: " + result.size)
 
-                Handler(Looper.getMainLooper()).post({
-                    refreshSucceeded(result)
-                })
+                runOnUiThread({ refreshSucceeded(result) })
             }
 
             override fun onFailure(call: Call?, e: IOException?) {
-                Handler(Looper.getMainLooper()).post({
-                    refreshFailed()
-                })
+                runOnUiThread({ refreshFailed() })
             }
         }, Array<Arena>::class.java)
     }

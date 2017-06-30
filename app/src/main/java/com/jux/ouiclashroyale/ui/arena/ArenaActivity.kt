@@ -3,8 +3,6 @@ package com.jux.ouiclashroyale.ui.arena
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.support.v7.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
@@ -57,9 +55,7 @@ class ArenaActivity : AppCompatActivity() {
         val request: Request = Request.Builder().url(arenaUrl + arenaId).build()
         HttpClient.asynchronousCall(request, object : HttpClientCallback<Arena> {
             override fun onSuccess(result: Arena) {
-                Handler(Looper.getMainLooper()).post({
-                    onArenaDownloaded(result)
-                })
+                runOnUiThread({ onArenaDownloaded(result) })
             }
 
             override fun onFailure(call: Call?, e: IOException?) {
