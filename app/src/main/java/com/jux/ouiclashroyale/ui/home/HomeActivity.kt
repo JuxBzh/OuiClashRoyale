@@ -1,18 +1,20 @@
 package com.jux.ouiclashroyale.ui.home
 
 import android.os.Bundle
+import android.support.v4.app.ActivityOptionsCompat
+import android.support.v4.view.ViewCompat
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import com.jux.ouiclashroyale.R
 import com.jux.ouiclashroyale.model.Arena
 import com.jux.ouiclashroyale.network.HttpClient
 import com.jux.ouiclashroyale.network.HttpClientCallback
 import com.jux.ouiclashroyale.ui.arena.ArenaActivity
-import com.jux.recyclerviewtoolkit.adapter.MultipleChoiceModeAdapter
 import kotlinx.android.synthetic.main.activity_home.*
 import okhttp3.Call
 import okhttp3.Request
@@ -21,7 +23,7 @@ import java.io.IOException
 
 class HomeActivity : AppCompatActivity(),
         SwipeRefreshLayout.OnRefreshListener,
-        MultipleChoiceModeAdapter.OnItemClickListener {
+        ArenaAdapter.OnItemClickListener {
 
     val tag: String = "HomeActivity"
     val arenasUrl: String = "http://www.clashapi.xyz/api/arenas"
@@ -58,14 +60,15 @@ class HomeActivity : AppCompatActivity(),
     }
 
     // ArenaAdapter.OnItemClickListener
-    override fun onItemClick(v: View?, position: Int) {
+    override fun onItemClicked(position: Int, arenaIcon: ImageView) {
         val arena = adapter.getItem(position)
 
-        val intent = ArenaActivity.getIntent(this, arena.id)
-        startActivity(intent)
-    }
+        val transitionName = ViewCompat.getTransitionName(arenaIcon)
+        val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this,
+                arenaIcon, transitionName)
 
-    override fun onInteractiveElementClick(iconView: View?, position: Int) {
+        val intent = ArenaActivity.getIntent(this, arena.id, transitionName)
+        startActivity(intent, options.toBundle())
     }
 
     // Helper methods
