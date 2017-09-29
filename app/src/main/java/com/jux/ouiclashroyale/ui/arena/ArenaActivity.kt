@@ -22,11 +22,10 @@ import java.io.IOException
 import java.lang.Exception
 
 class ArenaActivity : AppCompatActivity() {
-    val arenaUrl = "http://www.clashapi.xyz/api/arenas/"
+    private val arenaUrl = "http://www.clashapi.xyz/api/arenas/"
+    private val imageLoader: RequestManager by lazy { Glide.with(this) }
 
-    val imageLoader: RequestManager by lazy { Glide.with(this) }
-
-    val requestListener = object : RequestListener<String, Bitmap> {
+    private val requestListener = object : RequestListener<String, Bitmap> {
         override fun onResourceReady(resource: Bitmap?, model: String?, target: Target<Bitmap>?, isFromMemoryCache: Boolean, isFirstResource: Boolean): Boolean {
             // Start the Shared Transition Animation
             supportStartPostponedEnterTransition()
