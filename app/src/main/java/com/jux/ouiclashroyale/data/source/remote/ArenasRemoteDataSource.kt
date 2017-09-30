@@ -1,14 +1,23 @@
 package com.jux.ouiclashroyale.data.source.remote
 
+import okhttp3.Callback
 import okhttp3.OkHttpClient
+import okhttp3.Request
 
 /**
  * Represent the Data Source that will fetch arenas from the network
  */
 class ArenasRemoteDataSource(private val httpClient: OkHttpClient) {
 
-    private val BASE_URL = "http://www.clashapi.xyz/"
+    private val baseUrl = "http://www.clashapi.xyz/"
 
     fun getArena(id: String) {
+    }
+
+    fun getArenas(callback: Callback) {
+        val url = baseUrl + "api/arenas"
+        val request = Request.Builder().url(url).build()
+
+        httpClient.newCall(request).enqueue(callback)
     }
 }

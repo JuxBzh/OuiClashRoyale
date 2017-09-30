@@ -19,7 +19,7 @@ interface ArenasDataSource {
      * A callback interface to get notified when a list of arenas is loaded
      */
     interface ArenasCallback {
-        fun onArenasLoaded(arena: Array<Arena>)
+        fun onArenasLoaded(arenas: Array<Arena>)
         fun onError()
     }
 
