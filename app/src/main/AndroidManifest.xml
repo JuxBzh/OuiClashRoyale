@@ -12,21 +12,12 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name="com.jux.ouiclashroyale.old.ui.home.HomeActivity"
+            android:name="com.jux.ouiclashroyale.ui.ArenasActivity"
             android:label="@string/title_home_activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <activity
-            android:name="com.jux.ouiclashroyale.old.ui.arena.ArenaActivity"
-            android:parentActivityName="com.jux.ouiclashroyale.old.ui.home.HomeActivity">
-
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.jux.ouiclashroyale.old.ui.home.HomeActivity" />
         </activity>
     </application>
 </manifest>
