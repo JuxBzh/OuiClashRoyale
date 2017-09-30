@@ -15,8 +15,8 @@ class ArenaAdapter : RecyclerView.Adapter<ArenaViewHolder>() {
 
     override fun onBindViewHolder(holder: ArenaViewHolder?, position: Int) {
         val arena = data[position]
-        holder?.name?.text = "Name"
-        holder?.trophies?.text = "5"
+        holder?.name?.text = arena.name
+        holder?.trophies?.text = arena.minTrophies.toString()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ArenaViewHolder {

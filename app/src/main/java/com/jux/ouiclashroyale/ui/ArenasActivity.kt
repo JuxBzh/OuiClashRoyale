@@ -3,6 +3,7 @@ package com.jux.ouiclashroyale.ui
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
@@ -41,9 +42,7 @@ class ArenasActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener
     }
 
     private fun setupViewModel() {
-        val httpClient = OkHttpClient.Builder().build()
-
-        val remoteDataSource = ArenasRemoteDataSource(httpClient)
+        val remoteDataSource = ArenasRemoteDataSource(OkHttpClient())
         val repository = ArenasRepository(remoteDataSource, GsonBuilder().create())
 
         viewModel = ViewModelProviders.of(this).get(ArenasViewModel::class.java)
@@ -56,9 +55,26 @@ class ArenasActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener
             }
             adapter.swapData(arenas)
         })
+
+        viewModel.loading.observe(this, Observer {
+            if (it != null) swipe_refresh_layout.isRefreshing = it
+        })
+
+        viewModel.listViewVisibility.observe(this, Observer {
+            if (it != null) list.visibility = it
+        })
+
+        viewModel.emptyViewVisibility.observe(this, Observer {
+            if (it != null) empty.visibility = it
+        })
+
+        viewModel.error.observe(this, Observer {
+            if (it != null) Snackbar.make(coordinator, it, Snackbar.LENGTH_SHORT).show()
+        })
     }
 
     // SwipeRefreshLayout.OnRefreshListener
     override fun onRefresh() {
+        viewModel.refreshArenas()
     }
 }
