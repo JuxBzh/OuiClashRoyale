@@ -14,7 +14,7 @@ import com.jux.ouiclashroyale.data.Arena
 import com.jux.ouiclashroyale.data.source.ArenasRepository
 import com.jux.ouiclashroyale.data.source.remote.ArenasRemoteDataSource
 import com.jux.ouiclashroyale.viewmodel.ArenasViewModel
-import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.activity_arenas.*
 import okhttp3.OkHttpClient
 
 
@@ -24,7 +24,7 @@ class ArenasActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+        setContentView(R.layout.activity_arenas)
 
         setupView()
         setupViewModel()
