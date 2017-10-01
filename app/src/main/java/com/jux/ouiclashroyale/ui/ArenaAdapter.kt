@@ -9,7 +9,7 @@ import com.jux.ouiclashroyale.data.Arena
 /**
  * An adapter displaying a list of arenas
  */
-class ArenaAdapter : RecyclerView.Adapter<ArenaViewHolder>() {
+class ArenaAdapter(private val imageLoader: ArenaImageLoader) : RecyclerView.Adapter<ArenaViewHolder>() {
 
     private val data: MutableList<Arena> = mutableListOf()
 
@@ -17,6 +17,7 @@ class ArenaAdapter : RecyclerView.Adapter<ArenaViewHolder>() {
         val arena = data[position]
         holder?.name?.text = arena.name
         holder?.trophies?.text = arena.minTrophies.toString()
+        imageLoader.load(arena.idName, holder?.logo)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ArenaViewHolder {

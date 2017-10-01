@@ -19,7 +19,7 @@ import okhttp3.OkHttpClient
 
 
 class ArenasActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
-    private val adapter = ArenaAdapter()
+    private lateinit var adapter: ArenaAdapter
     private lateinit var viewModel: ArenasViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,6 +35,9 @@ class ArenasActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener
 
         swipe_refresh_layout.setColorSchemeResources(R.color.colorPrimary)
         swipe_refresh_layout.setOnRefreshListener(this)
+
+        val imageLoader = ArenaImageLoader(this)
+        adapter = ArenaAdapter(imageLoader)
 
         list.layoutManager = LinearLayoutManager(this)
         list.adapter = adapter
