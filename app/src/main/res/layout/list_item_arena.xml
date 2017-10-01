@@ -9,7 +9,7 @@
     android:paddingEnd="?attr/listPreferredItemPaddingRight"
     android:paddingLeft="?attr/listPreferredItemPaddingLeft"
     android:paddingRight="?attr/listPreferredItemPaddingRight"
-    android:background="@drawable/selectable_background">
+    android:background="?attr/selectableItemBackground">
 
     <ImageView
         android:id="@+id/logo"

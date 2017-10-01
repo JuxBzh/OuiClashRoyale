@@ -8,6 +8,7 @@ import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
+import android.widget.ImageView
 import com.google.gson.GsonBuilder
 import com.jux.ouiclashroyale.R
 import com.jux.ouiclashroyale.data.Arena
@@ -18,7 +19,8 @@ import kotlinx.android.synthetic.main.activity_arenas.*
 import okhttp3.OkHttpClient
 
 
-class ArenasActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
+class ArenasActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener, ArenaAdapter.OnItemClickListener {
+
     private lateinit var adapter: ArenaAdapter
     private lateinit var viewModel: ArenasViewModel
 
@@ -37,7 +39,7 @@ class ArenasActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener
         swipe_refresh_layout.setOnRefreshListener(this)
 
         val imageLoader = ArenaImageLoader(this)
-        adapter = ArenaAdapter(imageLoader)
+        adapter = ArenaAdapter(imageLoader, this)
 
         list.layoutManager = LinearLayoutManager(this)
         list.adapter = adapter
@@ -79,5 +81,10 @@ class ArenasActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener
     // SwipeRefreshLayout.OnRefreshListener
     override fun onRefresh() {
         viewModel.refreshArenas()
+    }
+
+    // ArenaAdapter.OnItemClickListener
+    override fun onItemClick(arena: Arena, imageView: ImageView) {
+        viewModel.onArenaSelected(arena, imageView)
     }
 }

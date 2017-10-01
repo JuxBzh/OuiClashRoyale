@@ -4,6 +4,7 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.view.View
+import android.widget.ImageView
 import com.jux.ouiclashroyale.data.Arena
 import com.jux.ouiclashroyale.data.source.ArenasDataSource
 
@@ -29,6 +30,9 @@ class ArenasViewModel : ViewModel(), ArenasDataSource.ArenasCallback {
 
     fun refreshArenas() {
         fetchArenas()
+    }
+
+    fun onArenaSelected(arena: Arena, arenaImage: ImageView) {
     }
 
     fun setDataSource(dataSource: ArenasDataSource) {
