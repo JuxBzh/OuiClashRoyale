@@ -4,7 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    buildToolsVersion '26.0.2'
 
     defaultConfig {
         applicationId "com.jux.ouiclashroyale"
@@ -44,4 +44,7 @@ dependencies {
 
     // Media management library
     implementation 'com.github.bumptech.glide:glide:3.7.0'
+
+    testImplementation "junit:junit:4.12"
+    testImplementation "org.mockito:mockito-core:2.10.0"
 }
