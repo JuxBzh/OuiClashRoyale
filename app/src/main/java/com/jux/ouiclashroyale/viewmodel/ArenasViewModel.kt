@@ -61,6 +61,10 @@ class ArenasViewModel : ViewModel(), ArenasDataSource.ArenasCallback {
         // Not loading anymore
         loading.postValue(false)
 
+        // Set List and Empty view visibility
+        listViewVisibility.postValue(View.GONE)
+        emptyViewVisibility.postValue(View.VISIBLE)
+
         // Error occurred
         error.postValue("Couldn't load arenas")
     }
