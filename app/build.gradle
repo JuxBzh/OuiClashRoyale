@@ -25,16 +25,16 @@ android {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 
-    implementation 'com.android.support:appcompat-v7:26.1.0'
-    implementation 'com.android.support:recyclerview-v7:26.1.0'
-    implementation 'com.android.support:cardview-v7:26.1.0'
-    implementation 'com.android.support:design:26.1.0'
+    implementation "com.android.support:appcompat-v7:$support_library_version"
+    implementation "com.android.support:recyclerview-v7:$support_library_version"
+    implementation "com.android.support:cardview-v7:$support_library_version"
+    implementation "com.android.support:design:$support_library_version"
 
     // Live Data and ViewModel
-    implementation "android.arch.lifecycle:extensions:1.0.0-alpha9-1"
+    implementation "android.arch.lifecycle:extensions:1.0.0"
 
     // Http Client
-    implementation 'com.squareup.okhttp3:okhttp:3.8.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.8.1'
 
     // Gson
     implementation 'com.google.code.gson:gson:2.8.0'
@@ -47,5 +47,5 @@ dependencies {
 
     testImplementation "junit:junit:4.12"
     testImplementation "org.mockito:mockito-core:2.10.0"
-    testImplementation "android.arch.core:core-testing:1.0.0-alpha9-1"
+    testImplementation "android.arch.core:core-testing:1.0.0"
 }
