@@ -13,6 +13,7 @@ import com.google.gson.GsonBuilder
 import com.jux.ouiclashroyale.R
 import com.jux.ouiclashroyale.data.Arena
 import com.jux.ouiclashroyale.data.source.ArenasRepository
+import com.jux.ouiclashroyale.data.source.model.RemoteArenaMapper
 import com.jux.ouiclashroyale.data.source.remote.ArenasRemoteDataSource
 import com.jux.ouiclashroyale.viewmodel.ArenasViewModel
 import kotlinx.android.synthetic.main.activity_arenas.*
@@ -48,7 +49,8 @@ class ArenasActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener
 
     private fun setupViewModel() {
         val remoteDataSource = ArenasRemoteDataSource(OkHttpClient())
-        val repository = ArenasRepository(remoteDataSource, GsonBuilder().create())
+        val mapper = RemoteArenaMapper()
+        val repository = ArenasRepository(remoteDataSource, mapper, GsonBuilder().create())
 
         viewModel = ViewModelProviders.of(this).get(ArenasViewModel::class.java)
         viewModel.setDataSource(repository)

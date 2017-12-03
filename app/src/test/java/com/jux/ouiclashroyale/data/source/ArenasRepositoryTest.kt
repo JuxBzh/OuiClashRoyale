@@ -3,6 +3,8 @@ package com.jux.ouiclashroyale.data.source
 import com.google.gson.Gson
 import com.google.gson.JsonParseException
 import com.jux.ouiclashroyale.data.Arena
+import com.jux.ouiclashroyale.data.source.model.RemoteArena
+import com.jux.ouiclashroyale.data.source.model.RemoteArenaMapper
 import com.jux.ouiclashroyale.data.source.remote.ArenasRemoteDataSource
 import okhttp3.Call
 import okhttp3.Callback
@@ -25,7 +27,10 @@ class ArenasRepositoryTest {
     private fun <T> anyNotNull(): T = null as T
 
     @Mock private val remoteDataSource = mock(ArenasRemoteDataSource::class.java)
+    @Mock private val mapper = mock(RemoteArenaMapper::class.java)
     @Mock private val gson = mock(Gson::class.java)
+
+    private fun setupRepository() = ArenasRepository(remoteDataSource, mapper, gson)
 
     @Test
     fun getArenasOnFailure() {
@@ -37,7 +42,7 @@ class ArenasRepositoryTest {
             arg.onFailure(call, exception)
         }.`when`(remoteDataSource).getArenas(any())
 
-        val repository = ArenasRepository(remoteDataSource, gson)
+        val repository = setupRepository()
 
         // WHEN
         val arenasCallback = mock(ArenasDataSource.ArenasCallback::class.java)
@@ -59,7 +64,7 @@ class ArenasRepositoryTest {
             arg.onResponse(call, response)
         }.`when`(remoteDataSource).getArenas(any())
 
-        val repository = ArenasRepository(remoteDataSource, gson)
+        val repository = setupRepository()
 
         // WHEN
         val arenasCallback = mock(ArenasDataSource.ArenasCallback::class.java)
@@ -76,19 +81,21 @@ class ArenasRepositoryTest {
         val response = mock(Response::class.java)
         val body = mock(ResponseBody::class.java)
         val reader = mock(Reader::class.java)
+        val remoteArenas = arrayOf<RemoteArena>()
         val arenas = arrayOf<Arena>()
 
         `when`(response.isSuccessful).thenReturn(true)
         `when`(response.body()).thenReturn(body)
         `when`(body.charStream()).thenReturn(reader)
-        `when`(gson.fromJson<Array<Arena>>(body?.charStream(), Array<Arena>::class.java)).thenReturn(arenas)
+        `when`(gson.fromJson<Array<RemoteArena>>(body?.charStream(), Array<RemoteArena>::class.java)).thenReturn(remoteArenas)
+        `when`(mapper.map(remoteArenas)).thenReturn(arenas)
 
         doAnswer { invocation ->
             val arg = invocation!!.arguments[0] as Callback
             arg.onResponse(call, response)
         }.`when`(remoteDataSource).getArenas(any())
 
-        val repository = ArenasRepository(remoteDataSource, gson)
+        val repository = setupRepository()
 
         // WHEN
         val arenasCallback = mock(ArenasDataSource.ArenasCallback::class.java)
@@ -109,14 +116,14 @@ class ArenasRepositoryTest {
         `when`(response.isSuccessful).thenReturn(true)
         `when`(response.body()).thenReturn(body)
         `when`(body.charStream()).thenReturn(reader)
-        `when`(gson.fromJson<Array<Arena>>(body?.charStream(), Array<Arena>::class.java)).thenThrow(JsonParseException(""))
+        `when`(gson.fromJson<Array<RemoteArena>>(body?.charStream(), Array<RemoteArena>::class.java)).thenThrow(JsonParseException(""))
 
         doAnswer { invocation ->
             val arg = invocation!!.arguments[0] as Callback
             arg.onResponse(call, response)
         }.`when`(remoteDataSource).getArenas(any())
 
-        val repository = ArenasRepository(remoteDataSource, gson)
+        val repository = setupRepository()
 
         // WHEN
         val arenasCallback = mock(ArenasDataSource.ArenasCallback::class.java)
