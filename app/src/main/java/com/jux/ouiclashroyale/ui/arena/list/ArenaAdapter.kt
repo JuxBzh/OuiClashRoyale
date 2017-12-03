@@ -1,4 +1,4 @@
-package com.jux.ouiclashroyale.ui
+package com.jux.ouiclashroyale.ui.arena.list
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import com.jux.ouiclashroyale.R
 import com.jux.ouiclashroyale.data.Arena
+import com.jux.ouiclashroyale.ui.common.ArenaImageLoader
 
 /**
  * An adapter displaying a list of arenas

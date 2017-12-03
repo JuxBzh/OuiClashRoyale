@@ -12,7 +12,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name="com.jux.ouiclashroyale.ui.ArenasActivity"
+            android:name="com.jux.ouiclashroyale.ui.arena.list.ArenasActivity"
             android:label="@string/title_home_activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

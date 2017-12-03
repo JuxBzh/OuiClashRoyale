@@ -1,4 +1,4 @@
-package com.jux.ouiclashroyale.ui
+package com.jux.ouiclashroyale.ui.arena.list
 
 import android.support.v7.widget.RecyclerView
 import android.view.View

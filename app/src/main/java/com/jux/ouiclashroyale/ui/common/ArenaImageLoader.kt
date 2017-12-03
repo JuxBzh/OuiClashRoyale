@@ -1,4 +1,4 @@
-package com.jux.ouiclashroyale.ui
+package com.jux.ouiclashroyale.ui.common
 
 import android.app.Activity
 import android.widget.ImageView

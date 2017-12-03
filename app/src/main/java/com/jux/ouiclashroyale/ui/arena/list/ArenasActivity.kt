@@ -1,4 +1,4 @@
-package com.jux.ouiclashroyale.ui
+package com.jux.ouiclashroyale.ui.arena.list
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
@@ -15,6 +15,7 @@ import com.jux.ouiclashroyale.data.Arena
 import com.jux.ouiclashroyale.data.source.ArenasRepository
 import com.jux.ouiclashroyale.data.source.model.RemoteArenaMapper
 import com.jux.ouiclashroyale.data.source.remote.ArenasRemoteDataSource
+import com.jux.ouiclashroyale.ui.common.ArenaImageLoader
 import com.jux.ouiclashroyale.viewmodel.ArenasViewModel
 import kotlinx.android.synthetic.main.activity_arenas.*
 import okhttp3.OkHttpClient
