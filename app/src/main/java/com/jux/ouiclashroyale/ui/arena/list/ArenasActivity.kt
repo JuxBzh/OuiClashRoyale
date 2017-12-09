@@ -18,12 +18,15 @@ import com.jux.ouiclashroyale.data.source.model.RemoteArenaMapper
 import com.jux.ouiclashroyale.data.source.remote.ArenasRemoteDataSource
 import com.jux.ouiclashroyale.ui.arena.detail.ArenaActivity
 import com.jux.ouiclashroyale.ui.common.ArenaImageLoader
+import com.jux.ouiclashroyale.ui.common.livedata.SnackbarMessage
 import com.jux.ouiclashroyale.viewmodel.ArenasViewModel
 import kotlinx.android.synthetic.main.activity_arenas.*
 import okhttp3.OkHttpClient
 
 
-class ArenasActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener, ArenaAdapter.OnItemClickListener {
+class ArenasActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener,
+        ArenaAdapter.OnItemClickListener,
+        SnackbarMessage.SnackbarObserver {
 
     private lateinit var adapter: ArenaAdapter
     private lateinit var viewModel: ArenasViewModel
@@ -78,9 +81,7 @@ class ArenasActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener
             empty.visibility = it ?: View.GONE
         })
 
-        viewModel.error.observe(this, Observer {
-            if (it != null) Snackbar.make(coordinator, it, Snackbar.LENGTH_SHORT).show()
-        })
+        viewModel.error.observe(this, this)
 
         viewModel.arenaClicked.observe(this, Observer {
             if (it != null) {
@@ -98,5 +99,10 @@ class ArenasActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener
     // ArenaAdapter.OnItemClickListener
     override fun onItemClick(arena: Arena, imageView: ImageView) {
         viewModel.onArenaSelected(arena, imageView)
+    }
+
+    // SnackbarObserver
+    override fun onNewMessage(message: String) {
+        Snackbar.make(coordinator, message, Snackbar.LENGTH_SHORT).show()
     }
 }

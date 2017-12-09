@@ -8,13 +8,14 @@ import android.widget.ImageView
 import com.jux.ouiclashroyale.data.Arena
 import com.jux.ouiclashroyale.data.source.ArenasDataSource
 import com.jux.ouiclashroyale.ui.common.livedata.SingleLiveEvent
+import com.jux.ouiclashroyale.ui.common.livedata.SnackbarMessage
 
 
 class ArenasViewModel : ViewModel(), ArenasDataSource.ArenasCallback {
     private var arenas: MutableLiveData<Array<Arena>>? = null
 
     val loading: MutableLiveData<Boolean> = MutableLiveData()
-    val error: SingleLiveEvent<String> = SingleLiveEvent()
+    val error: SnackbarMessage = SnackbarMessage()
 
     val listViewVisibility: MutableLiveData<Int> = MutableLiveData()
     val emptyViewVisibility: MutableLiveData<Int> = MutableLiveData()
