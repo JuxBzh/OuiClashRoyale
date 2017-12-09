@@ -7,13 +7,14 @@ import android.view.View
 import android.widget.ImageView
 import com.jux.ouiclashroyale.data.Arena
 import com.jux.ouiclashroyale.data.source.ArenasDataSource
+import com.jux.ouiclashroyale.ui.common.livedata.SingleLiveEvent
 
 
 class ArenasViewModel : ViewModel(), ArenasDataSource.ArenasCallback {
     private var arenas: MutableLiveData<Array<Arena>>? = null
 
     val loading: MutableLiveData<Boolean> = MutableLiveData()
-    val error: MutableLiveData<String> = MutableLiveData()
+    val error: SingleLiveEvent<String> = SingleLiveEvent()
 
     val listViewVisibility: MutableLiveData<Int> = MutableLiveData()
     val emptyViewVisibility: MutableLiveData<Int> = MutableLiveData()
