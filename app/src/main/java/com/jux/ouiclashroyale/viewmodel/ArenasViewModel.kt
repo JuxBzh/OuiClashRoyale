@@ -19,6 +19,8 @@ class ArenasViewModel : ViewModel(), ArenasDataSource.ArenasCallback {
     val listViewVisibility: MutableLiveData<Int> = MutableLiveData()
     val emptyViewVisibility: MutableLiveData<Int> = MutableLiveData()
 
+    val arenaClicked: SingleLiveEvent<String> = SingleLiveEvent()
+
     private var dataSource: ArenasDataSource? = null
 
     fun getArenas(): LiveData<Array<Arena>>? {
@@ -34,6 +36,7 @@ class ArenasViewModel : ViewModel(), ArenasDataSource.ArenasCallback {
     }
 
     fun onArenaSelected(arena: Arena, arenaImage: ImageView) {
+        arenaClicked.setValue(arena.id)
     }
 
     fun setDataSource(dataSource: ArenasDataSource) {

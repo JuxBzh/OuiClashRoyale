@@ -17,15 +17,15 @@ class ArenaAdapter(private val imageLoader: ArenaImageLoader, private val listen
 
     private val data: MutableList<Arena> = mutableListOf()
 
-    override fun onBindViewHolder(holder: ArenaViewHolder?, position: Int) {
+    override fun onBindViewHolder(holder: ArenaViewHolder, position: Int) {
         val arena = data[position]
-        holder?.name?.text = arena.name
-        holder?.trophies?.text = arena.minTrophies.toString()
-        imageLoader.load(arena.idName, holder?.logo)
+        holder.name.text = arena.name
+        holder.trophies.text = holder.itemView.context.getString(R.string.min_trophies, arena.minTrophies)
+        imageLoader.load(arena.idName, holder.logo)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ArenaViewHolder {
-        val itemView = LayoutInflater.from(parent?.context).inflate(R.layout.list_item_arena, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArenaViewHolder {
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.list_item_arena, parent, false)
         return ArenaViewHolder(itemView, this)
     }
 

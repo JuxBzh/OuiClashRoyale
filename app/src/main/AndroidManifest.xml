@@ -19,5 +19,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".ui.arena.detail.ArenaActivity"
+            android:label=""
+            android:parentActivityName=".ui.arena.list.ArenasActivity" />
+
     </application>
 </manifest>
