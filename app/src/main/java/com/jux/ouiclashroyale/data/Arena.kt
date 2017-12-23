@@ -7,5 +7,6 @@ data class Arena(
         val id: String = "",
         val idName: String = "",
         val name: String = "name",
-        val minTrophies: Int = 0
+        val minTrophies: Int = 0,
+        val goldPerVictory: Int = 0
 )

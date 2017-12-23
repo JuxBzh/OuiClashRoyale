@@ -63,6 +63,9 @@ class ArenaActivity : AppCompatActivity(),
 
             collapsingToolbarLayout.title = arena.name
             arenaImageLoader.load(arena.idName, arena_logo)
+
+            minTrophies.setText(arena.minTrophies.toString())
+            goldPerVictory.setText(arena.goldPerVictory.toString())
         })
 
         viewModel.error.observe(this, this)

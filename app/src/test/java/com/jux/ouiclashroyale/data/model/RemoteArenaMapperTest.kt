@@ -13,8 +13,8 @@ class RemoteArenaMapperTest {
     fun mapArenas() {
         // GIVEN
         val remoteArenas = arrayOf(
-                RemoteArena("id", "idName", "name", 10),
-                RemoteArena("id2", "idName2", "name2", 20)
+                RemoteArena("id", "idName", "name", 10, 5),
+                RemoteArena("id2", "idName2", "name2", 20, 10)
         )
 
         // WHEN
@@ -26,16 +26,18 @@ class RemoteArenaMapperTest {
         Assert.assertEquals("Index 0 - Wrong idName", "idName", arenas[0].idName)
         Assert.assertEquals("Index 0 - Wrong name", "name", arenas[0].name)
         Assert.assertEquals("Index 0 - Wrong minTrophies", 10, arenas[0].minTrophies)
+        Assert.assertEquals("Index 0 - Wrong goldPerVictory", 5, arenas[0].goldPerVictory)
         Assert.assertEquals("Index 1 - Wrong id", "id2", arenas[1].id)
         Assert.assertEquals("Index 1 - Wrong idName", "idName2", arenas[1].idName)
         Assert.assertEquals("Index 1 - Wrong name", "name2", arenas[1].name)
         Assert.assertEquals("Index 1 - Wrong minTrophies", 20, arenas[1].minTrophies)
+        Assert.assertEquals("Index 1 - Wrong goldPerVictory", 10, arenas[1].goldPerVictory)
     }
 
     @Test
     fun mapArena() {
         // GIVEN
-        val remoteArena = RemoteArena("id", "idName", "name", 10)
+        val remoteArena = RemoteArena("id", "idName", "name", 10, 20)
 
         // WHEN
         val arena = mapper.map(remoteArena)
@@ -45,5 +47,6 @@ class RemoteArenaMapperTest {
         Assert.assertEquals("Wrong idName", "idName", arena.idName)
         Assert.assertEquals("Wrong name", "name", arena.name)
         Assert.assertEquals("Wrong minTrophies", 10, arena.minTrophies)
+        Assert.assertEquals("Wrong goldPerVictory", 20, arena.goldPerVictory)
     }
 }

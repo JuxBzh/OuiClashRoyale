@@ -14,6 +14,7 @@ class RemoteArenaMapper {
         return Arena(remoteArena.id,
                 remoteArena.idName,
                 remoteArena.name,
-                remoteArena.minTrophies)
+                remoteArena.minTrophies,
+                remoteArena.victoryGold)
     }
 }
