@@ -132,4 +132,105 @@ class ArenasRepositoryTest {
         // THEN
         verify(arenasCallback).onError()
     }
+
+    @Test
+    fun getArenaOnFailure() {
+        // GIVEN
+        val call = mock(Call::class.java)
+        val exception = mock(IOException::class.java)
+        doAnswer { invocation ->
+            val arg = invocation!!.arguments[1] as Callback
+            arg.onFailure(call, exception)
+        }.`when`(remoteDataSource).getArena(any(), any())
+
+        val repository = setupRepository()
+
+        // WHEN
+        val arenaCallback = mock(ArenasDataSource.ArenaCallback::class.java)
+        repository.getArena("id", arenaCallback)
+
+        // THEN
+        verify(arenaCallback).onError()
+    }
+
+    @Test
+    fun getArenaOnSuccessWithUnsuccessfulResponse() {
+        // GIVEN
+        val call = mock(Call::class.java)
+        val response = mock(Response::class.java)
+
+        `when`(response.isSuccessful).thenReturn(false)
+        doAnswer { invocation ->
+            val arg = invocation!!.arguments[1] as Callback
+            arg.onResponse(call, response)
+        }.`when`(remoteDataSource).getArena(any(), any())
+
+        val repository = setupRepository()
+
+        // WHEN
+        val arenaCallback = mock(ArenasDataSource.ArenaCallback::class.java)
+        repository.getArena("id", arenaCallback)
+
+        // THEN
+        verify(arenaCallback).onError()
+    }
+
+    @Test
+    fun getArenaOnSuccessWithSuccessfulResponse() {
+        // GIVEN
+        val call = mock(Call::class.java)
+        val response = mock(Response::class.java)
+        val body = mock(ResponseBody::class.java)
+        val reader = mock(Reader::class.java)
+        val remoteArena = RemoteArena()
+        val arena = Arena()
+
+        `when`(response.isSuccessful).thenReturn(true)
+        `when`(response.body()).thenReturn(body)
+        `when`(body.charStream()).thenReturn(reader)
+        `when`(gson.fromJson<RemoteArena>(body?.charStream(), RemoteArena::class.java)).thenReturn(remoteArena)
+        `when`(mapper.map(remoteArena)).thenReturn(arena)
+
+        doAnswer { invocation ->
+            val arg = invocation!!.arguments[1] as Callback
+            arg.onResponse(call, response)
+        }.`when`(remoteDataSource).getArena(any(), any())
+
+        val repository = setupRepository()
+
+        // WHEN
+        val arenaCallback = mock(ArenasDataSource.ArenaCallback::class.java)
+        repository.getArena("id", arenaCallback)
+
+        // THEN
+        verify(arenaCallback).onArenaLoaded(arena)
+    }
+
+    @Test
+    fun getArenaOnSuccessWithSuccessfulResponseButParsingError() {
+        // GIVEN
+        val call = mock(Call::class.java)
+        val response = mock(Response::class.java)
+        val body = mock(ResponseBody::class.java)
+        val reader = mock(Reader::class.java)
+
+        `when`(response.isSuccessful).thenReturn(true)
+        `when`(response.body()).thenReturn(body)
+        `when`(body.charStream()).thenReturn(reader)
+        `when`(gson.fromJson<RemoteArena>(body?.charStream(), RemoteArena::class.java)).thenThrow(JsonParseException(""))
+
+        doAnswer { invocation ->
+            val arg = invocation!!.arguments[1] as Callback
+            arg.onResponse(call, response)
+        }.`when`(remoteDataSource).getArena(any(), any())
+
+        val repository = setupRepository()
+
+        // WHEN
+        val arenaCallback = mock(ArenasDataSource.ArenaCallback::class.java)
+        repository.getArena("id", arenaCallback)
+
+        // THEN
+        verify(arenaCallback).onError()
+    }
 }
