@@ -10,7 +10,7 @@ class RemoteArenaMapper {
         return remoteArenas.map { map(it) }.toTypedArray()
     }
 
-    private fun map(remoteArena: RemoteArena): Arena {
+    fun map(remoteArena: RemoteArena): Arena {
         return Arena(remoteArena.id,
                 remoteArena.idName,
                 remoteArena.name,

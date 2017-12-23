@@ -18,6 +18,15 @@ class ArenasRepository(private val remoteDataSource: ArenasRemoteDataSource,
 
 
     override fun getArena(id: String, callback: ArenasDataSource.ArenaCallback) {
+        remoteDataSource.getArena(id, object : Callback {
+            override fun onResponse(call: Call?, response: Response?) {
+                parseArena(response, callback)
+            }
+
+            override fun onFailure(call: Call?, e: IOException?) {
+                callback.onError()
+            }
+        })
     }
 
     override fun getArenas(callback: ArenasDataSource.ArenasCallback) {
@@ -30,6 +39,22 @@ class ArenasRepository(private val remoteDataSource: ArenasRemoteDataSource,
                 callback.onError()
             }
         })
+    }
+
+    private fun parseArena(response: Response?, callback: ArenasDataSource.ArenaCallback) {
+        if (response == null || !response.isSuccessful) {
+            callback.onError()
+            return
+        }
+
+        try {
+            val arena = gson.fromJson<RemoteArena>(response.body()?.charStream(), RemoteArena::class.java)
+            callback.onArenaLoaded(mapper.map(arena))
+        } catch (exception: Exception) {
+            callback.onError()
+        } finally {
+            response.body()?.close()
+        }
     }
 
     private fun parseResponse(response: Response?, callback: ArenasDataSource.ArenasCallback) {

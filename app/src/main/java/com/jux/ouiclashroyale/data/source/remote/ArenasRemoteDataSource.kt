@@ -11,7 +11,11 @@ class ArenasRemoteDataSource(private val httpClient: OkHttpClient) {
 
     private val baseUrl = "http://www.clashapi.xyz/"
 
-    fun getArena(id: String) {
+    fun getArena(id: String, callback: Callback) {
+        val url = baseUrl + "api/arenas/$id"
+        val request = Request.Builder().url(url).build()
+
+        httpClient.newCall(request).enqueue(callback)
     }
 
     fun getArenas(callback: Callback) {
