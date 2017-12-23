@@ -10,7 +10,7 @@ class RemoteArenaMapperTest {
     private val mapper = RemoteArenaMapper()
 
     @Test
-    fun mapTest() {
+    fun mapArenas() {
         // GIVEN
         val remoteArenas = arrayOf(
                 RemoteArena("id", "idName", "name", 10),
@@ -30,5 +30,20 @@ class RemoteArenaMapperTest {
         Assert.assertEquals("Index 1 - Wrong idName", "idName2", arenas[1].idName)
         Assert.assertEquals("Index 1 - Wrong name", "name2", arenas[1].name)
         Assert.assertEquals("Index 1 - Wrong minTrophies", 20, arenas[1].minTrophies)
+    }
+
+    @Test
+    fun mapArena() {
+        // GIVEN
+        val remoteArena = RemoteArena("id", "idName", "name", 10)
+
+        // WHEN
+        val arena = mapper.map(remoteArena)
+
+        // THEN
+        Assert.assertEquals("Wrong id", "id", arena.id)
+        Assert.assertEquals("Wrong idName", "idName", arena.idName)
+        Assert.assertEquals("Wrong name", "name", arena.name)
+        Assert.assertEquals("Wrong minTrophies", 10, arena.minTrophies)
     }
 }
