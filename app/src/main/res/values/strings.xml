@@ -10,7 +10,7 @@
     <string name="arena_detail_required_trophies">MINIMUM REQUIRED TROPHIES</string>
     <string name="arena_detail_gold_per_victory">GOLD PER VICTORY</string>
 
-    <string name="cards_title">Cards</string>
+    <string name="arena_cards_section_title">Cards</string>
     <string name="chests_title">Chests</string>
     <string name="clan_title">Clan</string>
 

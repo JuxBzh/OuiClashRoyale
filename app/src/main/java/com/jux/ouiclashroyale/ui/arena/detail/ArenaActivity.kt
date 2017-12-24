@@ -46,6 +46,8 @@ class ArenaActivity : AppCompatActivity(),
 
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        cards.isNestedScrollingEnabled = false
     }
 
     private fun setupViewModel() {

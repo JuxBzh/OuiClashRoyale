@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/coordinator"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -48,6 +49,7 @@
             android:paddingEnd="16dp"
             android:paddingTop="16dp">
 
+            <!-- Details -->
             <TextView
                 style="@style/AppTheme.TextAppearance.Title"
                 android:layout_width="wrap_content"
@@ -66,7 +68,8 @@
                     android:id="@+id/minTrophies"
                     style="@style/AppTheme.TextInputEditText.ReadOnly"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    tools:text="800" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -80,8 +83,22 @@
                     android:id="@+id/goldPerVictory"
                     style="@style/AppTheme.TextInputEditText.ReadOnly"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    tools:text="8" />
             </android.support.design.widget.TextInputLayout>
+
+            <!-- Cards -->
+            <TextView
+                style="@style/AppTheme.TextAppearance.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:text="@string/arena_cards_section_title" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/cards"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 </android.support.design.widget.CoordinatorLayout>
