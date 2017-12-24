@@ -6,7 +6,7 @@ import android.arch.lifecycle.ViewModel
 import android.view.View
 import android.widget.ImageView
 import com.jux.ouiclashroyale.data.Arena
-import com.jux.ouiclashroyale.data.source.ArenasDataSource
+import com.jux.ouiclashroyale.data.source.dataSource.ArenasDataSource
 import com.jux.ouiclashroyale.ui.common.livedata.SingleLiveEvent
 import com.jux.ouiclashroyale.ui.common.livedata.SnackbarMessage
 

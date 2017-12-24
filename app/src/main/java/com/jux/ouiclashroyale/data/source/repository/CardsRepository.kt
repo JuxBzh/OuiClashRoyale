@@ -1,8 +1,9 @@
-package com.jux.ouiclashroyale.data.source
+package com.jux.ouiclashroyale.data.source.repository
 
 import com.google.gson.Gson
+import com.jux.ouiclashroyale.data.source.dataSource.CardsDataSource
+import com.jux.ouiclashroyale.data.source.mapper.RemoteCardMapper
 import com.jux.ouiclashroyale.data.source.model.RemoteCard
-import com.jux.ouiclashroyale.data.source.model.RemoteCardMapper
 import com.jux.ouiclashroyale.data.source.remote.CardsRemoteDataSource
 import okhttp3.Call
 import okhttp3.Callback

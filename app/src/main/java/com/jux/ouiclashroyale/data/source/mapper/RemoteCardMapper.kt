@@ -1,6 +1,7 @@
-package com.jux.ouiclashroyale.data.source.model
+package com.jux.ouiclashroyale.data.source.mapper
 
 import com.jux.ouiclashroyale.data.Card
+import com.jux.ouiclashroyale.data.source.model.RemoteCard
 
 /**
  * Utility class that maps a RemoteCard to an Card

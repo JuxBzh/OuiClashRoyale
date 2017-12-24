@@ -13,9 +13,9 @@ import android.widget.ImageView
 import com.google.gson.GsonBuilder
 import com.jux.ouiclashroyale.R
 import com.jux.ouiclashroyale.data.Arena
-import com.jux.ouiclashroyale.data.source.ArenasRepository
-import com.jux.ouiclashroyale.data.source.model.RemoteArenaMapper
+import com.jux.ouiclashroyale.data.source.mapper.RemoteArenaMapper
 import com.jux.ouiclashroyale.data.source.remote.ArenasRemoteDataSource
+import com.jux.ouiclashroyale.data.source.repository.ArenasRepository
 import com.jux.ouiclashroyale.ui.arena.detail.ArenaActivity
 import com.jux.ouiclashroyale.ui.common.ArenaImageLoader
 import com.jux.ouiclashroyale.ui.common.livedata.SnackbarMessage

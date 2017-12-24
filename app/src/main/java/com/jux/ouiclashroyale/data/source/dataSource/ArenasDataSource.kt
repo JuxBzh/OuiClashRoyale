@@ -1,4 +1,4 @@
-package com.jux.ouiclashroyale.data.source
+package com.jux.ouiclashroyale.data.source.dataSource
 
 import com.jux.ouiclashroyale.data.Arena
 

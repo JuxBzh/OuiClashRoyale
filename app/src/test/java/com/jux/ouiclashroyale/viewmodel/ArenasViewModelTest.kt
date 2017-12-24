@@ -4,7 +4,7 @@ import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.arch.lifecycle.Observer
 import android.view.View
 import com.jux.ouiclashroyale.data.Arena
-import com.jux.ouiclashroyale.data.source.ArenasRepository
+import com.jux.ouiclashroyale.data.source.repository.ArenasRepository
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test

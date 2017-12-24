@@ -4,7 +4,7 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import com.jux.ouiclashroyale.data.Arena
-import com.jux.ouiclashroyale.data.source.ArenasDataSource
+import com.jux.ouiclashroyale.data.source.dataSource.ArenasDataSource
 import com.jux.ouiclashroyale.ui.common.livedata.SnackbarMessage
 
 

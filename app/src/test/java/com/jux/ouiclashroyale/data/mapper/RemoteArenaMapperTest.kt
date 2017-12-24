@@ -1,7 +1,7 @@
-package com.jux.ouiclashroyale.data.model
+package com.jux.ouiclashroyale.data.mapper
 
+import com.jux.ouiclashroyale.data.source.mapper.RemoteArenaMapper
 import com.jux.ouiclashroyale.data.source.model.RemoteArena
-import com.jux.ouiclashroyale.data.source.model.RemoteArenaMapper
 import org.junit.Assert
 import org.junit.Test
 

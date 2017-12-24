@@ -1,8 +1,9 @@
-package com.jux.ouiclashroyale.data.source
+package com.jux.ouiclashroyale.data.source.repository
 
 import com.google.gson.Gson
+import com.jux.ouiclashroyale.data.source.dataSource.ArenasDataSource
+import com.jux.ouiclashroyale.data.source.mapper.RemoteArenaMapper
 import com.jux.ouiclashroyale.data.source.model.RemoteArena
-import com.jux.ouiclashroyale.data.source.model.RemoteArenaMapper
 import com.jux.ouiclashroyale.data.source.remote.ArenasRemoteDataSource
 import okhttp3.Call
 import okhttp3.Callback

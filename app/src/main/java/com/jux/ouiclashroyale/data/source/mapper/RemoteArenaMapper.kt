@@ -1,6 +1,7 @@
-package com.jux.ouiclashroyale.data.source.model
+package com.jux.ouiclashroyale.data.source.mapper
 
 import com.jux.ouiclashroyale.data.Arena
+import com.jux.ouiclashroyale.data.source.model.RemoteArena
 
 /**
  * Utility class that maps a RemoteArena to an Arena

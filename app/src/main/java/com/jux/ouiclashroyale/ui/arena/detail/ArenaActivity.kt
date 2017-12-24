@@ -8,9 +8,9 @@ import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import com.google.gson.GsonBuilder
 import com.jux.ouiclashroyale.R
-import com.jux.ouiclashroyale.data.source.ArenasRepository
-import com.jux.ouiclashroyale.data.source.model.RemoteArenaMapper
+import com.jux.ouiclashroyale.data.source.mapper.RemoteArenaMapper
 import com.jux.ouiclashroyale.data.source.remote.ArenasRemoteDataSource
+import com.jux.ouiclashroyale.data.source.repository.ArenasRepository
 import com.jux.ouiclashroyale.ui.common.ArenaImageLoader
 import com.jux.ouiclashroyale.ui.common.livedata.SnackbarMessage
 import com.jux.ouiclashroyale.viewmodel.ArenaViewModel
