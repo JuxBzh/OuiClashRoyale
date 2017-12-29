@@ -16,6 +16,7 @@ class RemoteArenaMapper {
                 remoteArena.idName,
                 remoteArena.name,
                 remoteArena.minTrophies,
-                remoteArena.victoryGold)
+                remoteArena.victoryGold,
+                remoteArena.cardUnlocks)
     }
 }

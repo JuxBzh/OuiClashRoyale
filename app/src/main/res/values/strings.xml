@@ -15,4 +15,5 @@
     <string name="clan_title">Clan</string>
 
     <string name="content_desc_arena_logo">The logo of the arena</string>
+    <string name="content_desc_card_image">A card</string>
 </resources>

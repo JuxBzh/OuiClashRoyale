@@ -133,6 +133,6 @@ class ArenasViewModelTest {
         verify(loadingObserver).onChanged(false)
         verify(listViewVisibilityObserver).onChanged(View.GONE)
         verify(emptyViewVisibilityObserver).onChanged(View.VISIBLE)
-        verify(errorObserver).onChanged("Couldn't load arenas")
+        verify(errorObserver).onChanged("Couldn't loadArenaImage arenas")
     }
 }

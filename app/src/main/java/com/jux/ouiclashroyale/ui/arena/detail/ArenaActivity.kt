@@ -6,12 +6,18 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.GridLayoutManager
 import com.google.gson.GsonBuilder
 import com.jux.ouiclashroyale.R
+import com.jux.ouiclashroyale.data.Arena
 import com.jux.ouiclashroyale.data.source.mapper.RemoteArenaMapper
+import com.jux.ouiclashroyale.data.source.mapper.RemoteCardMapper
 import com.jux.ouiclashroyale.data.source.remote.ArenasRemoteDataSource
+import com.jux.ouiclashroyale.data.source.remote.CardsRemoteDataSource
 import com.jux.ouiclashroyale.data.source.repository.ArenasRepository
-import com.jux.ouiclashroyale.ui.common.ArenaImageLoader
+import com.jux.ouiclashroyale.data.source.repository.CardsRepository
+import com.jux.ouiclashroyale.ui.card.CardAdapter
+import com.jux.ouiclashroyale.ui.common.ImageLoader
 import com.jux.ouiclashroyale.ui.common.livedata.SnackbarMessage
 import com.jux.ouiclashroyale.viewmodel.ArenaViewModel
 import kotlinx.android.synthetic.main.activity_arena.*
@@ -31,7 +37,10 @@ class ArenaActivity : AppCompatActivity(),
         }
     }
 
-    private lateinit var arenaImageLoader: ArenaImageLoader
+    private lateinit var imageLoader: ImageLoader
+    private lateinit var cardAdapter: CardAdapter
+
+    private lateinit var viewModel: ArenaViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,39 +51,64 @@ class ArenaActivity : AppCompatActivity(),
     }
 
     private fun setupView() {
-        arenaImageLoader = ArenaImageLoader(this)
+        imageLoader = ImageLoader(this)
 
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        cardAdapter = CardAdapter(imageLoader)
         cards.isNestedScrollingEnabled = false
+        cards.adapter = cardAdapter
+
+        val cardsLayoutManager = GridLayoutManager(this, 3)
+        cards.layoutManager = cardsLayoutManager
     }
 
     private fun setupViewModel() {
         val arenaId = intent.getStringExtra(EXTRA_ARENA_ID)
 
-        val remoteDataSource = ArenasRemoteDataSource(OkHttpClient())
-        val mapper = RemoteArenaMapper()
-        val repository = ArenasRepository(remoteDataSource, mapper, GsonBuilder().create())
+        val httpClient = OkHttpClient()
+        val gson = GsonBuilder().create()
 
-        val viewModel = ArenaViewModel(arenaId)
-        viewModel.setDataSource(repository)
+        val remoteArenaDataSource = ArenasRemoteDataSource(httpClient)
+        val arenaMapper = RemoteArenaMapper()
+        val arenaRepository = ArenasRepository(remoteArenaDataSource, arenaMapper, gson)
+
+        val remoteCardsDataSource = CardsRemoteDataSource(httpClient)
+        val cardMapper = RemoteCardMapper()
+        val cardsRepository = CardsRepository(remoteCardsDataSource, cardMapper, gson)
+
+        viewModel = ArenaViewModel(arenaId)
+        viewModel.setArenasDataSource(arenaRepository)
+        viewModel.setCardsDataSource(cardsRepository)
+
+        viewModel.error.observe(this, this)
 
         viewModel.getArena()?.observe(this, Observer {
             val arena = it ?: return@Observer
 
             collapsingToolbarLayout.title = arena.name
-            arenaImageLoader.load(arena.idName, arena_logo)
+            imageLoader.loadArenaImage(arena.idName, arena_logo)
 
             minTrophies.setText(arena.minTrophies.toString())
             goldPerVictory.setText(arena.goldPerVictory.toString())
+
+            fetchCards(arena)
         })
 
-        viewModel.error.observe(this, this)
+        viewModel.getCards().observe(this, Observer {
+            cardAdapter.swapData(it)
+        })
+    }
+
+    private fun fetchCards(arena: Arena) {
+        for (card in arena.cards) {
+            viewModel.fetchCard(card)
+        }
     }
 
     // SnackbarObserver
     override fun onNewMessage(message: String) {
-        Snackbar.make(coordinator, message, Snackbar.LENGTH_SHORT)
+        Snackbar.make(coordinator, message, Snackbar.LENGTH_SHORT).show()
     }
 }

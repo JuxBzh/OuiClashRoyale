@@ -4,13 +4,20 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import com.jux.ouiclashroyale.data.Arena
+import com.jux.ouiclashroyale.data.Card
 import com.jux.ouiclashroyale.data.source.dataSource.ArenasDataSource
+import com.jux.ouiclashroyale.data.source.dataSource.CardsDataSource
 import com.jux.ouiclashroyale.ui.common.livedata.SnackbarMessage
 
 
-class ArenaViewModel(private val arenaId: String) : ViewModel(), ArenasDataSource.ArenaCallback {
+class ArenaViewModel(private val arenaId: String) : ViewModel(), ArenasDataSource.ArenaCallback,
+        CardsDataSource.CardCallback {
+
     private var arena: MutableLiveData<Arena>? = null
-    private var dataSource: ArenasDataSource? = null
+    private var cards = MutableLiveData<MutableList<Card>>()
+
+    private var arenasDataSource: ArenasDataSource? = null
+    private var cardsDataSource: CardsDataSource? = null
 
     val error: SnackbarMessage = SnackbarMessage()
 
@@ -22,12 +29,22 @@ class ArenaViewModel(private val arenaId: String) : ViewModel(), ArenasDataSourc
         return arena
     }
 
-    fun setDataSource(dataSource: ArenasDataSource?) {
-        this.dataSource = dataSource
+    fun getCards(): LiveData<MutableList<Card>> = cards
+
+    fun setArenasDataSource(dataSource: ArenasDataSource?) {
+        arenasDataSource = dataSource
+    }
+
+    fun setCardsDataSource(dataSource: CardsDataSource?) {
+        cardsDataSource = dataSource
     }
 
     private fun fetchArena() {
-        dataSource?.getArena(arenaId, this)
+        arenasDataSource?.getArena(arenaId, this)
+    }
+
+    fun fetchCard(id: String) {
+        cardsDataSource?.getCard(id, this)
     }
 
     // ArenasDataSource.ArenaCallback
@@ -36,6 +53,14 @@ class ArenaViewModel(private val arenaId: String) : ViewModel(), ArenasDataSourc
     }
 
     override fun onError() {
-        error.postValue("Failed to load arena!!")
+        error.postValue("Loading failed!!")
+    }
+
+    // CardsDataSource.CardCallback
+    override fun onCardLoaded(card: Card) {
+        // NB: Must use LiveData.postValue() when running on a background thread
+        val value = cards.value ?: mutableListOf()
+        value.add(card)
+        cards.postValue(value)
     }
 }

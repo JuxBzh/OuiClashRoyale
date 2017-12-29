@@ -71,6 +71,6 @@ class ArenasViewModel : ViewModel(), ArenasDataSource.ArenasCallback {
         emptyViewVisibility.postValue(View.VISIBLE)
 
         // Error occurred
-        error.postValue("Couldn't load arenas")
+        error.postValue("Couldn't loadArenaImage arenas")
     }
 }

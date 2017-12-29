@@ -9,7 +9,7 @@ import okhttp3.Request
  */
 class CardsRemoteDataSource(private val httpClient: OkHttpClient) {
 
-    private val baseUrl = "http://www.clashapi.xyz/api/cards"
+    private val baseUrl = "http://www.clashapi.xyz/api/cards/"
 
     fun getCard(id: String, callback: Callback) {
         val url = baseUrl + id

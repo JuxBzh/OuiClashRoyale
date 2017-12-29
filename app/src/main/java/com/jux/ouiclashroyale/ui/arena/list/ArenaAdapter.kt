@@ -6,12 +6,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import com.jux.ouiclashroyale.R
 import com.jux.ouiclashroyale.data.Arena
-import com.jux.ouiclashroyale.ui.common.ArenaImageLoader
+import com.jux.ouiclashroyale.ui.common.ImageLoader
 
 /**
  * An adapter displaying a list of arenas
  */
-class ArenaAdapter(private val imageLoader: ArenaImageLoader, private val listener: OnItemClickListener) :
+class ArenaAdapter(private val imageLoader: ImageLoader, private val listener: OnItemClickListener) :
         RecyclerView.Adapter<ArenaViewHolder>(),
         ArenaViewHolder.OnClickListener {
 
@@ -21,7 +21,7 @@ class ArenaAdapter(private val imageLoader: ArenaImageLoader, private val listen
         val arena = data[position]
         holder.name.text = arena.name
         holder.trophies.text = holder.itemView.context.getString(R.string.min_trophies, arena.minTrophies)
-        imageLoader.load(arena.idName, holder.logo)
+        imageLoader.loadArenaImage(arena.idName, holder.logo)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArenaViewHolder {

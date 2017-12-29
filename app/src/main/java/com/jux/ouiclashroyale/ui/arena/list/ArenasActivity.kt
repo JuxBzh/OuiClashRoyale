@@ -17,7 +17,7 @@ import com.jux.ouiclashroyale.data.source.mapper.RemoteArenaMapper
 import com.jux.ouiclashroyale.data.source.remote.ArenasRemoteDataSource
 import com.jux.ouiclashroyale.data.source.repository.ArenasRepository
 import com.jux.ouiclashroyale.ui.arena.detail.ArenaActivity
-import com.jux.ouiclashroyale.ui.common.ArenaImageLoader
+import com.jux.ouiclashroyale.ui.common.ImageLoader
 import com.jux.ouiclashroyale.ui.common.livedata.SnackbarMessage
 import com.jux.ouiclashroyale.viewmodel.ArenasViewModel
 import kotlinx.android.synthetic.main.activity_arenas.*
@@ -45,7 +45,7 @@ class ArenasActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener
         swipe_refresh_layout.setColorSchemeResources(R.color.colorPrimary)
         swipe_refresh_layout.setOnRefreshListener(this)
 
-        val imageLoader = ArenaImageLoader(this)
+        val imageLoader = ImageLoader(this)
         adapter = ArenaAdapter(imageLoader, this)
 
         list.layoutManager = LinearLayoutManager(this)
